@@ -6,5 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>task_management_service</RootNamespace>
   </PropertyGroup>
-
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.6.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.6.2" />
+	</ItemGroup>
 </Project>
