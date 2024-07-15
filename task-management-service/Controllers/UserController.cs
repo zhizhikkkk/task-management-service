@@ -1,4 +1,4 @@
-﻿// Controllers/UsersController.cs
+﻿
 using Core.Models;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
@@ -92,5 +92,29 @@ public class UsersController : ControllerBase
     {
         return _context.Users.Any(e => e.Id == id);
     }
+
+    [HttpGet("{id}/tasks")]
+    public async Task<ActionResult<IEnumerable<Core.Models.Task>>> GetUserTasks(int id)
+    {
+        return await _context.Tasks.Where(t => t.AssigneeId == id).ToListAsync();
+    }
+
+    [HttpGet("search")]
+    public async Task<ActionResult<IEnumerable<User>>> SearchUsers([FromQuery] string name, [FromQuery] string email)
+    {
+        var query = _context.Users.AsQueryable();
+
+        if (!string.IsNullOrEmpty(name))
+        {
+            query = query.Where(u => u.Name.Contains(name));
+        }
+        if (!string.IsNullOrEmpty(email))
+        {
+            query = query.Where(u => u.Email == email);
+        }
+
+        return await query.ToListAsync();
+    }
+
 }
 
