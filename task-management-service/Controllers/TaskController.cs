@@ -21,7 +21,7 @@ public class TasksController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Core.Models.Task>> GetTask(int id)
+    public async Task<ActionResult<Core.Models.Task>> GetTask(Guid id)
     {
         var task = await _context.Tasks.FindAsync(id);
 
@@ -43,7 +43,7 @@ public class TasksController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutTask(int id, Core.Models.Task task)
+    public async Task<IActionResult> PutTask(Guid id, Core.Models.Task task)
     {
         if (id != task.Id)
         {
@@ -72,7 +72,7 @@ public class TasksController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteTask(int id)
+    public async Task<IActionResult> DeleteTask(Guid id)
     {
         var task = await _context.Tasks.FindAsync(id);
         if (task == null)
@@ -87,7 +87,7 @@ public class TasksController : ControllerBase
     }
 
     [HttpGet("search")]
-    public async Task<ActionResult<IEnumerable<Core.Models.Task>>> SearchTasks([FromQuery] string title, [FromQuery] string status, [FromQuery] string priority, [FromQuery] int? assignee, [FromQuery] int? project)
+    public async Task<ActionResult<IEnumerable<Core.Models.Task>>> SearchTasks([FromQuery] string title, [FromQuery] string status, [FromQuery] string priority, [FromQuery] Guid? assignee, [FromQuery] Guid? project)
     {
         var query = _context.Tasks.AsQueryable();
 
@@ -115,7 +115,7 @@ public class TasksController : ControllerBase
         return await query.ToListAsync();
     }
 
-    private bool TaskExists(int id)
+    private bool TaskExists(Guid id)
     {
         return _context.Tasks.Any(e => e.Id == id);
     }

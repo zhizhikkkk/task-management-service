@@ -10,7 +10,7 @@ namespace Core.Models
 {
     public class Task
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; } = new Guid();
 
         [Required]
         public string Title { get; set; }
@@ -18,8 +18,8 @@ namespace Core.Models
         public string Description { get; set; }
         public string Priority { get; set; }
         public string Status { get; set; }
-        public int AssigneeId { get; set; }
-        public int ProjectId { get; set; }
+        public Guid AssigneeId { get; set; }
+        public Guid ProjectId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? CompletedAt { get; set; }
 

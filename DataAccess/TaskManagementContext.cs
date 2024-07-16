@@ -41,9 +41,11 @@ namespace DataAccess
         public TaskManagementContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<TaskManagementContext>();
-            optionsBuilder.UseNpgsql("Host=localhost;Database=taskmanager;Username=postgres;Password=postgres");
+            optionsBuilder.UseNpgsql("Host=localhost;Database=taskmanager;Username=postgres;Password=postgres",
+                b => b.MigrationsAssembly("DataAccess"));
 
             return new TaskManagementContext(optionsBuilder.Options);
         }
     }
+
 }

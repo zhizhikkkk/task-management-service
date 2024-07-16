@@ -21,7 +21,7 @@ public class ProjectsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Project>> GetProject(int id)
+    public async Task<ActionResult<Project>> GetProject(Guid id)
     {
         var project = await _context.Projects.FindAsync(id);
 
@@ -43,7 +43,7 @@ public class ProjectsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutProject(int id, Project project)
+    public async Task<IActionResult> PutProject(Guid id, Project project)
     {
         if (id != project.Id)
         {
@@ -72,7 +72,7 @@ public class ProjectsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteProject(int id)
+    public async Task<IActionResult> DeleteProject(Guid id)
     {
         var project = await _context.Projects.FindAsync(id);
         if (project == null)
@@ -87,13 +87,13 @@ public class ProjectsController : ControllerBase
     }
 
     [HttpGet("{id}/tasks")]
-    public async Task<ActionResult<IEnumerable<Core.Models.Task>>> GetProjectTasks(int id)
+    public async Task<ActionResult<IEnumerable<Core.Models.Task>>> GetProjectTasks(Guid id)
     {
         return await _context.Tasks.Where(t => t.ProjectId == id).ToListAsync();
     }
 
     [HttpGet("search")]
-    public async Task<ActionResult<IEnumerable<Project>>> SearchProjects([FromQuery] string title, [FromQuery] int? manager)
+    public async Task<ActionResult<IEnumerable<Project>>> SearchProjects([FromQuery] string title, [FromQuery] Guid? manager)
     {
         var query = _context.Projects.AsQueryable();
 
@@ -109,7 +109,7 @@ public class ProjectsController : ControllerBase
         return await query.ToListAsync();
     }
 
-    private bool ProjectExists(int id)
+    private bool ProjectExists(Guid id)
     {
         return _context.Projects.Any(e => e.Id == id);
     }

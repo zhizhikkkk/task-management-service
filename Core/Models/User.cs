@@ -9,7 +9,7 @@ namespace Core.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; } = new Guid();  
 
         [Required]
         public string Name { get; set; }

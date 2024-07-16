@@ -23,7 +23,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<User>> GetUser(int id)
+    public async Task<ActionResult<User>> GetUser(Guid id)
     {
         var user = await _context.Users.FindAsync(id);
 
@@ -45,7 +45,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutUser(int id, User user)
+    public async Task<IActionResult> PutUser(Guid id, User user)
     {
         if (id != user.Id)
         {
@@ -74,7 +74,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteUser(int id)
+    public async Task<IActionResult> DeleteUser(Guid id)
     {
         var user = await _context.Users.FindAsync(id);
         if (user == null)
@@ -88,13 +88,13 @@ public class UsersController : ControllerBase
         return NoContent();
     }
 
-    private bool UserExists(int id)
+    private bool UserExists(Guid id)
     {
         return _context.Users.Any(e => e.Id == id);
     }
 
     [HttpGet("{id}/tasks")]
-    public async Task<ActionResult<IEnumerable<Core.Models.Task>>> GetUserTasks(int id)
+    public async Task<ActionResult<IEnumerable<Core.Models.Task>>> GetUserTasks(Guid id)
     {
         return await _context.Tasks.Where(t => t.AssigneeId == id).ToListAsync();
     }
