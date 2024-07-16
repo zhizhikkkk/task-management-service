@@ -2,7 +2,7 @@
 services:
   postgres:
     container_name: taskmanager
-    image: taskmanager:latest
+    image: postgres:latest
     environment:
       POSTGRES_DB: "taskmanager"
       POSTGRES_USER: "postgres"
